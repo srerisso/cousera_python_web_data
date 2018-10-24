@@ -9,12 +9,18 @@ while True:
     print('Retrieving', fileData)
     data = uh.read()
     print('Retrieved', len(data), 'characters')
-    #print(data.decode())
+
     tree = ET.fromstring(data)
-
-    results = tree.findall('comments')
-    for child in results:
-      print(child.find('count').text
-    
-
-    #print(results.get_value)
+    comments = tree.findall('comments')
+    #  find count for all comments
+    countTotal = 0
+    i = 0
+    for comentario in comments:
+        for comentarioData in comentario.findall('comment'):
+            count = comentarioData.find('count').text
+            name = comentarioData.find('name').text
+            # print(name, count)
+            countTotal = countTotal + int(count)
+            i = i+1
+        print('Count: ', i)
+        print('Sum: ', countTotal)
